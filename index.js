@@ -45,7 +45,14 @@ exports.publish = function(options) {
 
         validator(options.path).then(function(validation) {
             if(validation.valid) {
-                client.publish(validation.id, options.type).then(resolve, reject);
+                client.publish(validation.id, options.type).then(function(result) {
+                    if(result.detail) {
+                        reject(result.detail);
+                    }
+                    else {
+                        resolve(result);
+                    }
+                }, reject);
             }
             else {
                 if(validation.validation) {
