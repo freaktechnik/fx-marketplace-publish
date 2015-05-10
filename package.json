@@ -1,0 +1,17 @@
+{
+  "name": "fx-marketplace-publish",
+  "version": "0.1.0",
+  "description": "Easily publish an application on the Firefox Marketplace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "firefox",
+    "marketplace",
+    "webapp",
+    "publish"
+  ],
+  "author": "freaktechnik (http://humanoids.be)",
+  "license": "MPL-2.0"
+}
