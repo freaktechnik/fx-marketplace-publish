@@ -19,7 +19,7 @@ The options object can have the following properties:
 Returns a Promise, which resolves when the app is successfully published on the firefox marketplace, and gets rejected whenever an error occurs, including a failed validation.
 
 ## Example
-This code snippet publishes a webapp packaged in `dist/my-webapp.zip` in the production evnironement of Firefox Marketplace (http://marketplace.firefox.com).
+This code snippet publishes a webapp packaged in `dist/my-webapp.zip` in the production environment of Firefox Marketplace (http://marketplace.firefox.com).
 ```js
 var { publish } = require("fx-marketplace-publish");
 
