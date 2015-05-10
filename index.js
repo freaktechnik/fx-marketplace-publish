@@ -48,7 +48,15 @@ exports.publish = function(options) {
                 client.publish(validation.id, options.type).then(resolve, reject);
             }
             else {
-                reject(validation.validation);
+                if(validation.validation) {
+                    reject(validation.validation);
+                }
+                else if(validation.upload) {
+                    reject(validation.upload[0]);
+                }
+                else {
+                    reject(validation);
+                }
             }
         }, reject);
     });
