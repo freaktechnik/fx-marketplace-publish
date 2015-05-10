@@ -1,5 +1,5 @@
 # fx-marketplace-publish
-Easily publish an application on the firefox marketplace
+Easily publish an application on the Firefox Marketplace
 
 ## Install
 Install the package in your project using `npm install --save fx-marketplace-publish`.
