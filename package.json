@@ -22,7 +22,7 @@
     "url": "https://github.com/freaktechnik/fx-marketplace-publish/issues"
   },
   "dependencies": {
-    "node-firefox-marketplace": "0.0.2",
+    "node-firefox-marketplace": ">0.0.2",
     "es6-promise": "~2.1.1"
   }
 }

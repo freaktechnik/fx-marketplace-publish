@@ -6,18 +6,41 @@
 
 'use strict';
 
-var { Promise } = require('es6-promise');
 var MarketplaceClient = require("node-firefox-marketplace");
 
 var getTypeFromPath = function(path) {
     if(path.match(/\.zip$/)) {
         return "packaged";
     }
-    else if(path.match(/\.webapp$/)) {
+    /*else if(path.match(/\.webapp$/)) {
+        return "manifest";
+    }*/
+    else {
         return "manifest";
     }
+};
+
+var publish = function(client, options, validation) {
+    if(validation.valid) {
+        return client.publish(validation.id, options.type).then(function(result) {
+            if(result.detail) {
+                throw result.detail;
+            }
+            else {
+                return result;
+            }
+        });
+    }
     else {
-        return "manifest":
+        if(validation.validation) {
+            throw validation.validation;
+        }
+        else if(validation.upload) {
+            throw validation.upload[0];
+        }
+        else {
+            throw validation;
+        }
     }
 };
 
@@ -37,36 +60,11 @@ exports.publish = function(options) {
     options.type = options.type || getTypeFromPath(options.path);
     var client = new MarketplaceClient(options);
 
-    var promise = Promise(function(resolve, reject) {
-        var vaidator = client.validateManifest;
-        if(options.type == "packaged") {
-            validator = client.validatePackage;
-        }
+    var validator = client.validateManifest;
+    if(options.type == "packaged") {
+        validator = client.validatePackage;
+    }
 
-        validator(options.path).then(function(validation) {
-            if(validation.valid) {
-                client.publish(validation.id, options.type).then(function(result) {
-                    if(result.detail) {
-                        reject(result.detail);
-                    }
-                    else {
-                        resolve(result);
-                    }
-                }, reject);
-            }
-            else {
-                if(validation.validation) {
-                    reject(validation.validation);
-                }
-                else if(validation.upload) {
-                    reject(validation.upload[0]);
-                }
-                else {
-                    reject(validation);
-                }
-            }
-        }, reject);
-    });
-    return promise;
+    return validator(options.path).then(publish.bind(publish, client, options));
 };
 
