@@ -1,6 +1,6 @@
 {
   "name": "fx-marketplace-publish",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Easily publish an application on the Firefox Marketplace",
   "main": "index.js",
   "scripts": {
