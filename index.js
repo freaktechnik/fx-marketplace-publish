@@ -60,11 +60,14 @@ exports.publish = function(options) {
     options.type = options.type || getTypeFromPath(options.path);
     var client = new MarketplaceClient(options);
 
-    var validator = "validateManifest";
-    if(options.type == "packaged") {
-        validator = "validatePackage";
+    var validator;
+    if(options.type === "packaged") {
+        validator = client.validatePackage(options.path);
+    }
+    else {
+        validator = client.validateManifest(options.path);
     }
 
-    return client[validator](options.path).then(publish.bind(publish, client, options));
+    return validator.then(publish.bind(publish, client, options));
 };
 
