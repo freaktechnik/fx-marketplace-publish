@@ -1,4 +1,6 @@
 # fx-marketplace-publish
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/freaktechnik/fx-marketplace-publish.svg)](https://greenkeeper.io/)
 Easily publish an application on the Firefox Marketplace
 
 ## Install
